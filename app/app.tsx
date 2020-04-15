@@ -18,6 +18,14 @@ import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
 import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 
+// Import GraphQL
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from '@apollo/react-hooks';
+
+const client = new ApolloClient({
+  uri: 'https://48p1r2roz4.sse.codesandbox.io',
+});
+
 // Import root app
 import App from 'containers/App';
 
@@ -54,7 +62,9 @@ const ConnectedApp = (props: { messages: any }) => (
     <LanguageProvider messages={props.messages}>
       <ConnectedRouter history={history}>
         <HelmetProvider>
-          <App />
+          <ApolloProvider client={client}>
+            <App />
+          </ApolloProvider>
         </HelmetProvider>
       </ConnectedRouter>
     </LanguageProvider>

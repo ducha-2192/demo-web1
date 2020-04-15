@@ -32,6 +32,17 @@ import { changeUsername } from './actions';
 import { makeSelectUsername } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import { gql } from "apollo-boost";
+import { useQuery } from '@apollo/react-hooks';
+
+const EXCHANGE_RATES = gql`
+  {
+    rates(currency: "USD") {
+      currency
+      rate
+    }
+  }
+`;
 
 const key = 'home';
 
@@ -42,9 +53,25 @@ const stateSelector = createStructuredSelector({
   error: makeSelectError(),
 });
 
+function ExchangeRates() {
+  const { loading, error, data } = useQuery(EXCHANGE_RATES);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
+
+  return (
+    <select>
+      {data.rates.map(({ currency, rate }) => (
+        <option key={currency}>
+          {currency}: {rate}
+        </option>
+      ))}
+    </select>
+  );
+}
+
 export default function HomePage() {
   const { repos, username, loading, error } = useSelector(stateSelector);
-
   const dispatch = useDispatch();
 
   // Not gonna declare event types here. No need. any is fine
@@ -86,6 +113,7 @@ export default function HomePage() {
         />
       </Helmet>
       <div>
+        <ExchangeRates />
         <CenteredSection>
           <H2>
             <FormattedMessage {...messages.startProjectHeader} />

@@ -12,6 +12,9 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'Features',
   },
+  listCurrency: {
+    id: `${scope}.listCurrency`
+  },
   scaffoldingHeader: {
     id: `${scope}.scaffolding.header`,
     defaultMessage: 'Quick scaffolding',
