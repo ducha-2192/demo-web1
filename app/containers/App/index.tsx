@@ -12,7 +12,8 @@ import styled from 'styles/styled-components';
 import { Switch, Route } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 
-import HomePage from 'containers/HomePage/Loadable';
+import Launches from 'containers/Launches/Loadable';
+import LaunchDetail from 'containers/LaunchDetail/Loadable';
 import FeaturePage from 'containers/FeaturePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
@@ -32,19 +33,12 @@ const AppWrapper = styled.div`
 function App() {
   return (
     <AppWrapper>
-      <Helmet
-        titleTemplate="%s - React.js Boilerplate"
-        defaultTitle="React.js Boilerplate"
-      >
-        <meta name="description" content="A React.js Boilerplate application" />
-      </Helmet>
-      <Header />
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/" component={Launches} />
         <Route path="/features" component={FeaturePage} />
+        <Route path="/launch/:flight_number" component={LaunchDetail} />
         <Route component={NotFoundPage} />
       </Switch>
-      <Footer />
       <GlobalStyle />
     </AppWrapper>
   );
