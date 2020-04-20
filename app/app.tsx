@@ -21,10 +21,29 @@ import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 // Import GraphQL
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
+import { gql } from "apollo-boost";
 
 const client = new ApolloClient({
-  uri: 'https://48p1r2roz4.sse.codesandbox.io',
+  uri: 'http://localhost:5000/graphql',
 });
+
+// client
+//   .query({
+//     query: gql`
+//       {
+//         launch(flight_number: 2){
+//         mission_name
+//         launch_year
+//         launch_success
+//         rocket {
+//           rocket_name
+//           rocket_type
+//         }
+//       }
+//       }
+//     `
+//   })
+//   .then(result => console.log(result));
 
 // Import root app
 import App from 'containers/App';
