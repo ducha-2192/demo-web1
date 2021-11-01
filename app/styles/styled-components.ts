@@ -3,6 +3,7 @@ import * as styledComponents from 'styled-components';
 // theme.ts
 // your theme variables
 // test
+// test 2
 export interface IThemeInterface {
   primary: string;
   componentBackground: string;
